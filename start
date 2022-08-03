@@ -1,0 +1,5 @@
+EMAIL=email@domain.com \
+GRAFANA_HOST=grafana.sld.tld \
+ADMIN_USER=your_user \
+ADMIN_PASSWORD=your_password \
+docker-compose up -d --remove-orphans --build $@
