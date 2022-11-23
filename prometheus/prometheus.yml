@@ -39,6 +39,18 @@ scrape_configs:
     static_configs:
       - targets: ['grafana:3000']
 
+  - job_name: 'erigon'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['$ERIGON_IP:6969']
+    metrics_path: "/debug/metrics/prometheus"
+
+  - job_name: 'nethermind'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['$NETHERMIND_IP:6969']
+    metrics_path: "/metrics"
+
 alerting:
   alertmanagers:
   - scheme: http
