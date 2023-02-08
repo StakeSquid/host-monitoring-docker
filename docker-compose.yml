@@ -245,7 +245,7 @@ services:
 
 
   blockexporter:
-    image: haritowa/latest-block-exporter:latest
+    image: haritowa/latest-block-exporter:1.3.0
     container_name: blockexporter
     restart: unless-stopped
     env_file:

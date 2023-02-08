@@ -24,7 +24,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 4,
+  "id": 6,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -2522,7 +2522,7 @@
           "mappings": [
             {
               "options": {
-                "from": -20,
+                "from": -100,
                 "result": {
                   "index": 0,
                   "text": "Synced"
@@ -3449,6 +3449,6 @@
   "timezone": "",
   "title": "RPC",
   "uid": "9XH7Fn0Vk",
-  "version": 51,
+  "version": 3,
   "weekStart": ""
 }

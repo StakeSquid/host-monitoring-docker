@@ -1,0 +1,380 @@
+apiVersion: 1
+
+
+groups:
+  - orgId: 1
+    name: 'Accounts'
+    folder: 'accounts'
+    interval: 1m
+    rules:
+      - uid: xJ2HV904k
+        title: Allocation Life ETH Goerli
+        condition: condition
+        data:
+        - refId: allocations
+          queryType: ''
+          relativeTimeRange:
+            from: 3600
+            to: 0
+          datasourceUid: P1809F7CD0C75ACF3
+          model:
+            editorMode: code
+            expr: epoch{network="eth-goerli"} - on(network) group_right() allocation_epoch{network="eth-goerli"}
+            hide: false
+            intervalMs: 1000
+            legendFormat: __auto
+            maxDataPoints: 43200
+            range: true
+            refId: allocations
+        - refId: allocations_latest
+          queryType: ''
+          relativeTimeRange:
+            from: 600
+            to: 0
+          datasourceUid: "-100"
+          model:
+            conditions:
+            - evaluator:
+                params: []
+                type: gt
+              operator:
+                type: and
+              query:
+                params:
+                - B
+              reducer:
+                params: []
+                type: last
+              type: query
+            datasource:
+              type: __expr__
+              uid: "-100"
+            expression: allocations
+            hide: false
+            intervalMs: 1000
+            maxDataPoints: 43200
+            reducer: last
+            refId: allocations_latest
+            settings:
+              mode: dropNN
+            type: reduce
+        - refId: condition
+          queryType: ''
+          relativeTimeRange:
+            from: 600
+            to: 0
+          datasourceUid: "-100"
+          model:
+            conditions:
+            - evaluator:
+                params:
+                - 4
+                type: gt
+              operator:
+                type: and
+              query:
+                params:
+                - C
+              reducer:
+                params: []
+                type: last
+              type: query
+            datasource:
+              type: __expr__
+              uid: "-100"
+            expression: allocations_latest
+            hide: false
+            intervalMs: 1000
+            maxDataPoints: 43200
+            refId: condition
+            type: threshold
+        updated: '2023-02-08T21:13:11Z'
+        noDataState: NoData
+        execErrState: Error
+        for: 5m
+        dashboardUid: 0mdxxQ0Vz
+        panelId: '8'
+        annotations:
+          __dashboardUid__: 0mdxxQ0Vz
+          __panelId__: '8'
+        labels:
+          notification: stale_allocation
+      - uid: xJ2HV904km
+        title: Allocation Life ETH Mainnet
+        condition: condition
+        data:
+        - refId: allocations
+          queryType: ''
+          relativeTimeRange:
+            from: 3600
+            to: 0
+          datasourceUid: P1809F7CD0C75ACF3
+          model:
+            editorMode: code
+            expr: epoch{network="eth-mainnet"} - on(network) group_right() allocation_epoch{network="eth-mainnet"}
+            hide: false
+            intervalMs: 1000
+            legendFormat: __auto
+            maxDataPoints: 43200
+            range: true
+            refId: allocations
+        - refId: allocations_latest
+          queryType: ''
+          relativeTimeRange:
+            from: 600
+            to: 0
+          datasourceUid: "-100"
+          model:
+            conditions:
+            - evaluator:
+                params: []
+                type: gt
+              operator:
+                type: and
+              query:
+                params:
+                - B
+              reducer:
+                params: []
+                type: last
+              type: query
+            datasource:
+              type: __expr__
+              uid: "-100"
+            expression: allocations
+            hide: false
+            intervalMs: 1000
+            maxDataPoints: 43200
+            reducer: last
+            refId: allocations_latest
+            settings:
+              mode: dropNN
+            type: reduce
+        - refId: condition
+          queryType: ''
+          relativeTimeRange:
+            from: 600
+            to: 0
+          datasourceUid: "-100"
+          model:
+            conditions:
+            - evaluator:
+                params:
+                - 28
+                type: gt
+              operator:
+                type: and
+              query:
+                params:
+                - C
+              reducer:
+                params: []
+                type: last
+              type: query
+            datasource:
+              type: __expr__
+              uid: "-100"
+            expression: allocations_latest
+            hide: false
+            intervalMs: 1000
+            maxDataPoints: 43200
+            refId: condition
+            type: threshold
+        updated: '2023-02-08T21:13:11Z'
+        noDataState: NoData
+        execErrState: Error
+        for: 5m
+        dashboardUid: 0mdxxQ0Vz
+        panelId: '8'
+        annotations:
+          __dashboardUid__: 0mdxxQ0Vz
+          __panelId__: '8'
+        labels:
+          notification: stale_allocation
+      - uid: "-FOsn904z"
+        title: Balance ETH Goerli
+        condition: condition
+        data:
+        - refId: wallet_balance
+          queryType: ''
+          relativeTimeRange:
+            from: 21600
+            to: 0
+          datasourceUid: P1809F7CD0C75ACF3
+          model:
+            datasource:
+              type: prometheus
+              uid: P1809F7CD0C75ACF3
+            editorMode: code
+            expr: wallet_balance{network="eth-goerli"}
+            interval: ''
+            intervalMs: 15000
+            legendFormat: __auto
+            maxDataPoints: 43200
+            range: true
+            refId: wallet_balance
+        - refId: wallet_balance_latest
+          queryType: ''
+          relativeTimeRange:
+            from: 600
+            to: 0
+          datasourceUid: "-100"
+          model:
+            conditions:
+            - evaluator:
+                params: []
+                type: gt
+              operator:
+                type: and
+              query:
+                params:
+                - A
+              reducer:
+                params: []
+                type: last
+              type: query
+            datasource:
+              type: __expr__
+              uid: "-100"
+            expression: wallet_balance
+            hide: false
+            intervalMs: 1000
+            maxDataPoints: 43200
+            reducer: last
+            refId: wallet_balance_latest
+            type: reduce
+        - refId: condition
+          queryType: ''
+          relativeTimeRange:
+            from: 600
+            to: 0
+          datasourceUid: "-100"
+          model:
+            conditions:
+            - evaluator:
+                params:
+                - 0.5
+                type: lt
+              operator:
+                type: and
+              query:
+                params:
+                - B
+              reducer:
+                params: []
+                type: last
+              type: query
+            datasource:
+              type: __expr__
+              uid: "-100"
+            expression: wallet_balance_latest
+            hide: false
+            intervalMs: 1000
+            maxDataPoints: 43200
+            refId: condition
+            type: threshold
+        updated: '2023-02-08T22:08:41Z'
+        noDataState: NoData
+        execErrState: Error
+        for: 5m
+        dashboardUid: 0mdxxQ0Vz
+        panelId: '4'
+        annotations:
+          __dashboardUid__: 0mdxxQ0Vz
+          __panelId__: '4'
+        labels:
+          notification: low_balance
+
+      - uid: "-FOsn904zm"
+        title: Balance ETH Mainnet
+        condition: condition
+        data:
+        - refId: wallet_balance
+          queryType: ''
+          relativeTimeRange:
+            from: 21600
+            to: 0
+          datasourceUid: P1809F7CD0C75ACF3
+          model:
+            datasource:
+              type: prometheus
+              uid: P1809F7CD0C75ACF3
+            editorMode: code
+            expr: wallet_balance{network="eth-mainnet"}
+            interval: ''
+            intervalMs: 15000
+            legendFormat: __auto
+            maxDataPoints: 43200
+            range: true
+            refId: wallet_balance
+        - refId: wallet_balance_latest
+          queryType: ''
+          relativeTimeRange:
+            from: 600
+            to: 0
+          datasourceUid: "-100"
+          model:
+            conditions:
+            - evaluator:
+                params: []
+                type: gt
+              operator:
+                type: and
+              query:
+                params:
+                - A
+              reducer:
+                params: []
+                type: last
+              type: query
+            datasource:
+              type: __expr__
+              uid: "-100"
+            expression: wallet_balance
+            hide: false
+            intervalMs: 1000
+            maxDataPoints: 43200
+            reducer: last
+            refId: wallet_balance_latest
+            type: reduce
+        - refId: condition
+          queryType: ''
+          relativeTimeRange:
+            from: 600
+            to: 0
+          datasourceUid: "-100"
+          model:
+            conditions:
+            - evaluator:
+                params:
+                - 0.1
+                type: lt
+              operator:
+                type: and
+              query:
+                params:
+                - B
+              reducer:
+                params: []
+                type: last
+              type: query
+            datasource:
+              type: __expr__
+              uid: "-100"
+            expression: wallet_balance_latest
+            hide: false
+            intervalMs: 1000
+            maxDataPoints: 43200
+            refId: condition
+            type: threshold
+        updated: '2023-02-08T22:08:41Z'
+        noDataState: NoData
+        execErrState: Error
+        for: 5m
+        dashboardUid: 0mdxxQ0Vz
+        panelId: '4'
+        annotations:
+          __dashboardUid__: 0mdxxQ0Vz
+          __panelId__: '4'
+        labels:
+          notification: low_balance
