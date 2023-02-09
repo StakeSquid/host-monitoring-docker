@@ -92,10 +92,6 @@ services:
       - '--web.console.templates=/etc/prometheus/consoles'
       - '--storage.tsdb.retention.time=200h'
       - '--web.enable-lifecycle'
-    environment:
-      - VIRTUAL_HOST=${PROMETHEUS_HOST}
-      - VIRTUAL_PORT=9090
-      - LETSENCRYPT_HOST=${PROMETHEUS_HOST}
     restart: unless-stopped
     expose:
       - 9090
