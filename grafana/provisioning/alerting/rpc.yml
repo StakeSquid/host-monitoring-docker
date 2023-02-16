@@ -14,7 +14,7 @@ groups:
         - refId: rpc_diff
           queryType: ''
           relativeTimeRange:
-            from: 3600
+            from: 86400
             to: 0
           datasourceUid: P1809F7CD0C75ACF3
           model:
