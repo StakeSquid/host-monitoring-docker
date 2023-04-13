@@ -122,6 +122,18 @@ scrape_configs:
     metrics_path: /avalanche/latest
     static_configs:
       - targets: ['blockexporter:8081']
+    
+  - job_name: fantom_current
+    scrape_interval: 5s
+    metrics_path: /fantom/current
+    static_configs:
+      - targets: ['blockexporter:8081']
+
+  - job_name: fantom_latest
+    scrape_interval: 15s
+    metrics_path: /fantom/latest
+    static_configs:
+      - targets: ['blockexporter:8081']
 
   - job_name: wallets_eth_mainnet
     scrape_interval: 60s
