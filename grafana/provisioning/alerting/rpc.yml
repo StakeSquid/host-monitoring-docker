@@ -1,0 +1,101 @@
+apiVersion: 1
+
+
+groups:
+  - orgId: 1
+    name: 'RPC-Alerts'
+    folder: 'RPC-Alerts'
+    interval: 1m
+    rules:
+      - uid: 7l0sQt14k
+        title: Chain Distance
+        condition: condition
+        data:
+        - refId: rpc_diff
+          queryType: ''
+          relativeTimeRange:
+            from: 86400
+            to: 0
+          datasourceUid: P1809F7CD0C75ACF3
+          model:
+            editorMode: code
+            expr: last_over_time(latest_block[1h]) - on (instance, blockchain) group_right
+              last_over_time(current_block[1h])
+            hide: false
+            intervalMs: 1000
+            legendFormat: "{{name}}"
+            maxDataPoints: 43200
+            range: true
+            refId: rpc_diff
+        - refId: rpc_diff_last
+          queryType: ''
+          relativeTimeRange:
+            from: 3600
+            to: 0
+          datasourceUid: "-100"
+          model:
+            conditions:
+            - evaluator:
+                params:
+                - 0
+                - 0
+                type: gt
+              operator:
+                type: and
+              query:
+                params: []
+              reducer:
+                params: []
+                type: avg
+              type: query
+            datasource:
+              name: Expression
+              type: __expr__
+              uid: __expr__
+            expression: rpc_diff
+            intervalMs: 1000
+            maxDataPoints: 43200
+            reducer: last
+            refId: rpc_diff_last
+            settings:
+              mode: ''
+            type: reduce
+        - refId: condition
+          queryType: ''
+          relativeTimeRange:
+            from: 3600
+            to: 0
+          datasourceUid: "-100"
+          model:
+            conditions:
+            - evaluator:
+                params:
+                - 25
+                - 0
+                type: gt
+              operator:
+                type: and
+              query:
+                params: []
+              reducer:
+                params: []
+                type: avg
+              type: query
+            datasource:
+              name: Expression
+              type: __expr__
+              uid: __expr__
+            expression: rpc_diff_last
+            intervalMs: 1000
+            maxDataPoints: 43200
+            refId: condition
+            type: threshold
+        updated: '2023-02-15T17:23:52Z'
+        noDataState: Alerting
+        execErrState: Error
+        for: 5m
+        annotations:
+          __dashboardUid__: 9XH7Fn0Vk
+          __panelId__: '10'
+        labels:
+          notification: chain_diverge
